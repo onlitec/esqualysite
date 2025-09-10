@@ -138,24 +138,25 @@ window.addEventListener('scroll', () => {
 
 // Animação de entrada dos elementos
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.15,
+    rootMargin: '0px 0px -30px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.style.transform = 'translateY(0) scale(1)';
+            entry.target.classList.add('animate-in');
         }
     });
 }, observerOptions);
 
 // Observar elementos para animação
-document.querySelectorAll('.diferencial-card, .servico-card, .portfolio-item, .blog-card').forEach(el => {
+document.querySelectorAll('.diferencial-card, .servico-card, .portfolio-item, .blog-card').forEach((el, index) => {
     el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    el.style.transform = 'translateY(20px) scale(0.95)';
+    el.style.transition = `opacity 0.4s ease ${index * 0.1}s, transform 0.4s ease ${index * 0.1}s`;
     observer.observe(el);
 });
 
